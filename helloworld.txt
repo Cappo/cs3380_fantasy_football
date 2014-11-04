@@ -1,4 +1,8 @@
 Hello, World!
+<<<<<<< HEAD
 Max
 Cappo wrote this line.
 Using GitHub is super coooool.
+=======
+Hello, Student Center! -Matt
+>>>>>>> Moran
