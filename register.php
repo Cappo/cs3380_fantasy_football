@@ -21,8 +21,8 @@
 		if ($password !== $c_password) $c_password_error = true; // Make sure password and confirm password are the same
 		
 		// Connect to the database
-		include("/secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
+		include("secure/database.php");
+		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die(pg_last_error());
 		
 		// Make sure that the username is available (does not already exist)
 		$name = pg_prepare($conn, 'username', "SELECT username FROM lab8.user_info WHERE username=$1;")
