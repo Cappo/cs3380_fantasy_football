@@ -17,7 +17,7 @@
 		$password = htmlspecialchars($password);
 		
 		// Connect to the database
-		include("../../secure/database.php");
+		include("/secure/database.php");
 		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 		
 		// First, try to find the authentication information for provided username.
