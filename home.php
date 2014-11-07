@@ -1,6 +1,6 @@
 <?php
 	// First, make sure we are on HTTPS, if not, switch to that
-	if (!$_SERVER['HTTPS']) header('location: https://babbage.cs.missouri.edu/~nc2b6/cs3380/lab8/index.php');
+	if (!$_SERVER['HTTPS']) header('location: https://babbage.cs.missouri.edu/~cs3380f14grp10');
 	
 	// Second, make sure we are logged in, if not, redirect to index.php
 	session_start();
