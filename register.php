@@ -49,7 +49,7 @@
 				or die("Failed to execute authentication query");
 			
 			// Start session and redirect to home.php
-			//session_start();
+			session_start();
 			$_SESSION['login'] = $league;
 			header('location: home.php');
 		}
