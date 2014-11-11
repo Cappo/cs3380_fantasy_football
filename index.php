@@ -18,7 +18,7 @@
 		
 		// Connect to the database
 		include("/secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die("Failed to connect to the database");
+		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 		
 		// First, try to find the authentication information for provided league.
 		$name = pg_prepare($conn, 'league', "SELECT * FROM master.authentication WHERE league=$1;")

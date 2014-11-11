@@ -7,7 +7,7 @@
 		// Record this successful login to the log
 		// Connect to the database
 		include("secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die("Failed to connect to the database");
+		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 						
 		// Logout process, unset session variables and destroy the session
 		$_SESSION = array(); // unset session variables

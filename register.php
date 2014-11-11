@@ -22,7 +22,7 @@
 		
 		// Connect to the database
 		include("secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die(pg_last_error());
+		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die(pg_last_error());
 		
 		// Make sure that the league is available (does not already exist)
 		$name = pg_prepare($conn, 'league', "SELECT league FROM master.user_info WHERE league=$1;")
