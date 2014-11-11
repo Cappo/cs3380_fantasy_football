@@ -18,7 +18,7 @@
 	<?php
 	// Display IP address and registration date
 	// Connect to the database
-	include("/secure/database.php");
+	include("secure/database.php");
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	echo "IP Address: " . $_SERVER['REMOTE_ADDR'] . "<br>";
