@@ -9,12 +9,12 @@
 	
 	// Third, see if the form was already submitted, and if so, check information
 	if (isset($_POST['submit'])){
-		$username = $_POST['username'];
+		$league = $_POST['league'];
 		$password = $_POST['password'];
 		$c_password = $_POST['c_password'];
 		
 		// Prevent the addition of html special characters
-		$username = htmlspecialchars($username);
+		$league = htmlspecialchars($league);
 		$password = htmlspecialchars($password);
 		$c_password = htmlspecialchars($c_password);
 		
@@ -22,41 +22,35 @@
 		
 		// Connect to the database
 		include("secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die(pg_last_error());
+		$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die(pg_last_error());
 		
-		// Make sure that the username is available (does not already exist)
-		$name = pg_prepare($conn, 'username', "SELECT username FROM lab8.user_info WHERE username=$1;")
-			or die("Failed to create username check query");
-		$name = pg_execute($conn, 'username', array($username)) // Registration date will default to now
-			or die("Failed to execute username check query");
-		if (pg_num_rows($name) > 0) $username_error = true;
+		// Make sure that the league is available (does not already exist)
+		$name = pg_prepare($conn, 'league', "SELECT league FROM master.user_info WHERE league=$1;")
+			or die("Failed to create league check query");
+		$name = pg_execute($conn, 'league', array($league)) // Registration date will default to now
+			or die("Failed to execute league check query");
+		if (pg_num_rows($name) > 0) $league_error = true;
 		
-		if (!$c_password_error && !$username_error){			
+		if (!$c_password_error && !$league_error){			
 			mt_srand(); // Seed number generator
 			$salt = mt_rand();
 			$hash = sha1($salt . $password);
 			
 			// Insert appropriate data into authentication user info, this must be first as authentication depends on this!
-			$info = pg_prepare($conn, 'user_info', "INSERT INTO lab8.user_info (username) VALUES ($1);")
+			$info = pg_prepare($conn, 'user_info', "INSERT INTO master.user_info (league) VALUES ($1);")
 				or die("Failed to create user info query");
-			$info = pg_execute($conn, 'user_info', array($username)) // Registration date will default to now
+			$info = pg_execute($conn, 'user_info', array($league)) // Registration date will default to now
 				or die("Failed to execute user info query");
 			
 			// Insert appropriate data into authentication table
-			$auth = pg_prepare($conn, 'authentication', 'INSERT INTO lab8.authentication VALUES ($1, $2, $3);')
+			$auth = pg_prepare($conn, 'authentication', 'INSERT INTO master.authentication VALUES ($1, $2, $3);')
 				or die("Failed to create authentication query");
-			$auth = pg_execute($conn, 'authentication', array($username, $hash, $salt))
+			$auth = pg_execute($conn, 'authentication', array($league, $hash, $salt))
 				or die("Failed to execute authentication query");
-				
-			// Record this registration into the log
-			$log = pg_prepare($conn, 'log', "INSERT INTO lab8.log (username, ip_address, action) VALUES ($1, $2, 'registration');")
-				or die("Failed to create log query");
-			$log = pg_execute($conn, 'log', array($username, $_SERVER['REMOTE_ADDR'])) // We will use default values for log_id and log_date
-				or die("Failed to execute log query");
-				
+			
 			// Start session and redirect to home.php
 			//session_start();
-			$_SESSION['login'] = $username;
+			$_SESSION['login'] = $league;
 			header('location: home.php');
 		}
 		
@@ -71,10 +65,10 @@
 		<h1>Register</h1>
 	</div>
 	<form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" >
-		<div class="form-group <?php if ($username_error) echo 'has-error'; ?>">
-			<label for="username" class="control-label">Username</label>
-			<input id="username" type="text" name="username" class="form-control" value="<?php echo $username; ?>" required>
-			<?php if ($username_error) echo '<p class="help-block">There is already an account with this username!</p>'; ?>
+		<div class="form-group <?php if ($league_error) echo 'has-error'; ?>">
+			<label for="league" class="control-label">league</label>
+			<input id="league" type="text" name="league" class="form-control" value="<?php echo $league; ?>" required>
+			<?php if ($league_error) echo '<p class="help-block">There is already an account with this league!</p>'; ?>
 		</div>
 		<div class="form-group">
 			<label for="password" class="control-label">Password</label>

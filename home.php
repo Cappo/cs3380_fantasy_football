@@ -19,23 +19,15 @@
 	// Display IP address and registration date
 	// Connect to the database
 	include("/secure/database.php");
-	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
+	$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die("Failed to connect to the database");
 	
 	echo "IP Address: " . $_SERVER['REMOTE_ADDR'] . "<br>";
-	$registration = pg_prepare($conn, 'registration_date', "SELECT registration_date FROM lab8.user_info WHERE username=$1;")
+	$registration = pg_prepare($conn, 'registration_date', "SELECT registration_date FROM master.user_info WHERE league=$1;")
 		or die("Failed to create registration fetch query");
 	$registration = pg_execute($conn, 'registration_date', array($logged_in))
 		or die("Failed to execute registration fetch query");
 	$registration = pg_fetch_array($registration, NULL, PGSQL_ASSOC);
-	echo "Registration date: " . $registration['registration_date'] . "<br>";
-	
-	// Pull the log of the username and display it using my display_table function
-	$log_data = pg_prepare($conn, 'display_log', "SELECT * FROM lab8.log WHERE username=$1;")
-		or die("Failed to create display log query");
-	$log_data = pg_execute($conn, 'display_log', array($logged_in)) // Registration date will default to now
-		or die("Failed to execute display_log query");
-	display_table($log_data);
-	
+	echo "Registration date: " . $registration['registration_date'] . "<br>";	
 	?>
 	<br>
 	<a href="logout.php" class="btn btn-danger">Logout</a>

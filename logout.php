@@ -6,14 +6,8 @@
 	if ($logged_in){
 		// Record this successful login to the log
 		// Connect to the database
-		include("../../secure/database.php");
-		$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
-			
-		
-		$log = pg_prepare($conn, 'log', "INSERT INTO lab8.log (username, ip_address, action) VALUES ($1, $2, 'logout');")
-			or die("Failed to create log query");
-		$log = pg_execute($conn, 'log', array($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) // We will use default values for log_id and log_date
-			or die("Failed to execute log query");
+		include("secure/database.php");
+		$conn = pg_connect(HOST." ".DBNAME." ".league." ".PASSWORD) or die("Failed to connect to the database");
 						
 		// Logout process, unset session variables and destroy the session
 		$_SESSION = array(); // unset session variables
