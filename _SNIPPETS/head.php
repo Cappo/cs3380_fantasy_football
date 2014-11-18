@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <head/>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="home.php">Fantasy Football</a>
@@ -18,8 +18,7 @@
 				<span class="icon-bar"></span>
 			</button>
 		</div>
-		<div class="collapse navbar-collapse" id="nav-collapse">
-			<p class="navbar-text">League</p>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li>League</li>
 				<li>Teams Dropdown</li>
