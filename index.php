@@ -36,6 +36,13 @@
 			if ($check_hash == $fetch['password_hash']){
 				// Start session and redirect to home.php
 				$_SESSION['login'] = $league;
+				// Get game state and add that to session as well
+				$game_state = pg_prepare($conn, 'state', "SELECT state FROM master.user_info WHERE league=$1;")
+					or die("Failed to create state query");
+				$game_state = pg_execute($conn, 'state', array($league))
+					or die("Failed to execute state query");
+				$game_state = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+				$_SESSION['state'] = $game_state['state'];
 				header('location: home.php');
 			} else {
 				$password_error = true;

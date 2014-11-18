@@ -51,6 +51,7 @@
 			// Start session and redirect to home.php
 			session_start();
 			$_SESSION['login'] = $league;
+			$_SESSION['state'] = 0; // Because you just registered the team, the default state will be 0, so go ahead and hard set it here
 			header('location: home.php');
 		}
 		

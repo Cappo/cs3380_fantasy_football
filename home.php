@@ -13,8 +13,19 @@
 <div class="container">
 		<div class="jumbotron">
 		<h1><?php echo $logged_in; ?></h1>
-		<p>Here it might say, DRAFT TIME! Or display the week number</p>
-		<p>This is also where there may be <span class="btn btn-default">Buttons</span> might be to progress to the next week or go to draft</p>
+        <?php
+			switch($_SESSION['state']){
+				case 0:
+					echo '<p>Team creation!</p><br><a href="draft.php" class="btn btn-default">Go to draft</a>';
+					break;
+				case 1:
+					echo '<p>Draft!</p><br><a href="draft.php" class="btn btn-default">Back to draft</a>';
+					break;
+				case 2:
+					echo '<p>Week #!</p><br><a href="#" clas="btn btn-default">Next week</a>';
+					break;
+			}
+		?>
 	</div>
 	<div class="page-header">
 		<h1>Teams</h1>
@@ -32,7 +43,7 @@
 	display_table($teams);
 	?>
 	
-	<a href="create_team.php" class="btn btn-default">Create Team</a>
+	<?php if($_SESSION['state'] == 0){ ?><a href="create_team.php" class="btn btn-default">Create Team</a><?php } ?>
 	<a href="logout.php" class="btn btn-danger">Logout</a>
 </div>
 <?php

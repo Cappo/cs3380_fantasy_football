@@ -6,6 +6,8 @@
 	session_start();
 	$logged_in = empty($_SESSION['login']) ? false : $_SESSION['login'];
 	if (!$logged_in) header('location: index.php');
+	// If game state is not 0 we cannot create teams so redirect home
+	if ($_SESSION['state'] !== 0) header('location: home.php');
 	
 	// Third, see if the form was already submitted, and if so, check information
 	if (isset($_POST['submit'])){
@@ -60,7 +62,7 @@
 			<?php if ($team_error) echo '<p class="help-block">There is already a team with this name in this league!</p>'; ?>
 		</div>
 		<div class="form-group <?php if ($about_error) echo 'has-error'; ?>">
-			<label for="about" class="control-label">Confirm Password</label>
+			<label for="about" class="control-label">About Team</label>
 			<textarea id="about" name="about" class="form-control" required>
 				<?php echo $about; ?>
 			</textarea>
