@@ -7,7 +7,7 @@
 	$logged_in = empty($_SESSION['login']) ? false : $_SESSION['login'];
 	if (!$logged_in) header('location: index.php');
 	// If game state is not 0 we cannot create teams so redirect home
-	if ($_SESSION['state'] !== 0) header('location: home.php');
+	if ($_SESSION['state'] != 0) header('location: home.php');
 	
 	// Third, see if the form was already submitted, and if so, check information
 	if (isset($_POST['submit'])){
