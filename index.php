@@ -41,7 +41,7 @@
 					or die("Failed to create state query");
 				$game_state = pg_execute($conn, 'state', array($league))
 					or die("Failed to execute state query");
-				$game_state = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+				$game_state = pg_fetch_array($game_state, NULL, PGSQL_ASSOC);
 				$_SESSION['state'] = $game_state['state'];
 				header('location: home.php');
 			} else {
