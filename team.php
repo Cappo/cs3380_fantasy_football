@@ -12,13 +12,12 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	// Get the team we are looking at
-	$team = pg_prepare($conn, 'team', "SELECT * FROM master.team WHERE league=$1 AND name=$2;")
+	$team = pg_prepare($conn, 'team', "SELECT * FROM master.team WHERE league=$1 AND team_id=$2;")
 		or die("Failed to create team fetch query");
 	$team = pg_execute($conn, 'team', array($logged_in, $_GET['team']))
 		or die("Failed to execute team fetch query");
-	$team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
-	
 	if (pg_num_rows($team) < 1) $team_error = true;
+	else $team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
