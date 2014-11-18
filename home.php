@@ -55,7 +55,7 @@
 				echo '<tr>';
 				foreach ($row as $key => $value){
 						if ($key == 'name')
-							echo '<td><a href="team.php?team='.$row['team_id'].'">'.$value.'</a></td>';
+							echo '<td><a href="team.php?team='.$value.'">'.$value.'</a></td>';
 						else
 							echo '<td>'.$value.'</td>';
 				}
