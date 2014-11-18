@@ -12,8 +12,8 @@
 			on gamedb.test.id = gamedb.s2008.id
 			where gamedb.test.lname ilike ('%'||$1||'%')
 			or gamedb.test.fname ilike ('%'||$2||'%')";
-	$result = pg_prepare($db,"search_p",$sql) or die('Could Not Prepare'.pg_last_error());
-	$result = pg_execute($db,"search_p",array($z,$z)) or die('Could Not Execute'.pg_last_error());
+	$result = pg_prepare($conn,"search_p",$sql) or die('Could Not Prepare'.pg_last_error());
+	$result = pg_execute($conn,"search_p",array($z,$z)) or die('Could Not Execute'.pg_last_error());
 	
 	
 	//basically just copied this from user.php though using pg_field_name could be neater

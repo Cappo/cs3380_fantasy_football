@@ -12,8 +12,8 @@
 			on gamedb.test.id = gamedb.s2008.id
 			where gamedb.test.pos = $1
 			order by gamedb.test.fname asc";
-	$result = pg_prepare($db,"players",$sql) or die('Could Not Prepare'.pg_last_error());
-	$result = pg_execute($db,"players",array($q)) or die('Could Not Execute'.pg_last_error());
+	$result = pg_prepare($conn,"players",$sql) or die('Could Not Prepare'.pg_last_error());
+	$result = pg_execute($conn,"players",array($q)) or die('Could Not Execute'.pg_last_error());
 	
 	//the echos are long, but I took out POS column....might haven taken more out cant remember 
 	echo "<table align='center' class='table table-hover table-striped table-bordered'>
