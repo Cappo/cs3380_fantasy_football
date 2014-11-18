@@ -1,11 +1,4 @@
-DROP TABLE IF EXISTS master.authentication;
-DROP TABLE IF EXISTS master.user_info;
-DROP TABLE IF EXISTS master.teams;
-DROP TABLE IF EXISTS master.draft;
-DROP TABLE IF EXISTS master.league;
-
-
-DROP SCHEMA IF EXISTS master;
+DROP SCHEMA IF EXISTS master CASCADE;
 
 CREATE SCHEMA master;
 
