@@ -32,7 +32,7 @@
 	<br>
 	<?php
 	// Fetch teams for league
-	$teams = pg_prepare($conn, 'league_teams', "SELECT name AS Team Name,points AS Points,num_players AS Team Players,about AS About FROM master.team WHERE league=$1;")
+	$teams = pg_prepare($conn, 'league_teams', "SELECT name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
 		or die("Failed to create teams fetch query");
 	$teams = pg_execute($conn, 'league_teams', array($logged_in))
 		or die("Failed to execute teams fetch query");
