@@ -18,7 +18,7 @@
 		or die("Failed to execute team fetch query");
 	$team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	
-	if (pg_num_rows($name) < 1) $team_error = true;
+	if (pg_num_rows($team) < 1) $team_error = true;
 	
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
