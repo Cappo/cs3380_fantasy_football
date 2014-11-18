@@ -62,7 +62,7 @@ CREATE TABLE draft (
 	team_id		INTEGER			NOT NULL,
 	league		VARCHAR(100)	NOT NULL,
 	PRIMARY KEY (player_id,team_id),
-	FOREIGN KEY (team) REFERENCES team(team_id),
+	FOREIGN KEY (team_id) REFERENCES team(team_id),
 	--FOREIGN KEY (player_id) REFERENCES ,
 	FOREIGN KEY (league) REFERENCES user_info(league)
 );
