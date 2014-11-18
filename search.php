@@ -7,11 +7,10 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql to search first and last name 
-	$sql = "select * from gamedb.test
-			inner join gamedb.s2008
-			on gamedb.test.id = gamedb.s2008.id
-			where gamedb.test.lname ilike ('%'||$1||'%')
-			or gamedb.test.fname ilike ('%'||$2||'%')";
+	$sql = "select * from seasondb.season
+			where seasondb.season.lname ilike ('%'||$1||'%')
+			or seasondb.season.fname ilike ('%'||$2||'%')
+			order by points desc";
 	$result = pg_prepare($conn,"search_p",$sql) or die('Could Not Prepare'.pg_last_error());
 	$result = pg_execute($conn,"search_p",array($z,$z)) or die('Could Not Execute'.pg_last_error());
 	
@@ -36,12 +35,13 @@
 		<th style='text-align:center'>Rec</th>
 		<th style='text-align:center'>RecYD</th>
 		<th style='text-align:center'>RecTD</th>
+		<th style='text-align:center'>Points</th>
 		</tr>";
 	echo '<tbody>';
 	while($row = pg_fetch_array($result)){
 		echo "<tr align='center'>";
-		echo "<td>".$row['lname']."</td>";
 		echo "<td>".$row['fname']."</td>";
+		echo "<td>".$row['lname']."</td>";
 		echo "<td>".$row['team']."</td>";
 		echo "<td>".$row['pos']."</td>";
 		echo "<td>".$row['g']."</td>";
@@ -56,6 +56,7 @@
 		echo "<td>".$row['rec']."</td>";
 		echo "<td>".$row['recyd']."</td>";
 		echo "<td>".$row['rectd']."</td>";
+		echo "<td>".$row['points']."</td>";
 		echo "</tr>";
 	}
 	echo "</tbody>";
