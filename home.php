@@ -10,6 +10,21 @@
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
 ?>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			Fantasy Football
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-4">
+			<p class="navbar-text">League</p>
+			<ul class="nav navbar-nav">
+				<li>League</li>
+				<li>Teams Dropdown</li>
+				<li>Players</li>
+			</ul>
+        </div>
+	</div>
+</nav>
 <div class="container">
 	<div class="page-header">
 		<h1>Home</h1>
@@ -21,7 +36,6 @@
 	include("secure/database.php");
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
-	echo "IP Address: " . $_SERVER['REMOTE_ADDR'] . "<br>";
 	$registration = pg_prepare($conn, 'registration_date', "SELECT registration_date FROM master.user_info WHERE league=$1;")
 		or die("Failed to create registration fetch query");
 	$registration = pg_execute($conn, 'registration_date', array($logged_in))

@@ -48,6 +48,7 @@
 	include_once('_SNIPPETS/head.php');
 	
 ?>
+
 <div class="container">
 	<div class="page-header">
 		<h1>Create Team</h1>

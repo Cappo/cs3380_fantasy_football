@@ -41,13 +41,14 @@ CREATE TABLE authentication (
 --    turn_order    - 
 --	  about			- A short description about the team
 CREATE TABLE team (
+	team_id		SERIAL,
 	name 		VARCHAR(100) NOT NULL,
 	league		VARCHAR(100) NOT NULL,
 	points 		INTEGER DEFAULT 0,
 	num_players INTEGER DEFAULT 0,
 	turn_order	INTEGER,
 	about		VARCHAR(255),
-	PRIMARY KEY(name),
+	PRIMARY KEY(team_id),
 	FOREIGN KEY(league) REFERENCES user_info(league)
 );
 
@@ -57,11 +58,11 @@ CREATE TABLE team (
 --    team 			- Name of team the player was drafted for. References team list.
 --    league   		- The name of the league the player was drafted in. References the user_info table.
 CREATE TABLE draft (
-	player_id	VARCHAR(25)		NOT NULL,
-	team		VARCHAR(100)	NOT NULL,
+	player_id	VARCHAR(3)		NOT NULL,
+	team_id		INTEGER			NOT NULL,
 	league		VARCHAR(100)	NOT NULL,
-	PRIMARY KEY (player_id,team),
-	FOREIGN KEY (team) REFERENCES team(name),
+	PRIMARY KEY (player_id,team_id),
+	FOREIGN KEY (team) REFERENCES team(team_id),
 	--FOREIGN KEY (player_id) REFERENCES ,
 	FOREIGN KEY (league) REFERENCES user_info(league)
 );
