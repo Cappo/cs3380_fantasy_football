@@ -11,10 +11,14 @@
 	include_once('_SNIPPETS/head.php');
 ?>
 <div class="container">
-	<div class="page-header">
-		<h1>Home</h1>
+		<div class="jumbotron">
+		<h1><?php echo $logged_in; ?></h1>
+		<p>Here it might say, DRAFT TIME! Or display the week number</p>
+		<p>This is also where there may be <span class="btn btn-default">Buttons</span> might be to progress to the next week or go to draft</p>
 	</div>
-	<p>Welcome, <?php echo $logged_in; ?>!</p>
+	<div class="page-header">
+		<h1>Teams</h1>
+	</div>
 	<?php
 	// Display IP address and registration date
 	// Connect to the database
