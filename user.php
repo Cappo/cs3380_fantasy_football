@@ -7,11 +7,9 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql uses the value from dropdown for the position
-	$sql = "select * from gamedb.test 
-			inner join gamedb.s2008
-			on gamedb.test.id = gamedb.s2008.id
-			where gamedb.test.pos = $1
-			order by gamedb.test.fname asc";
+	$sql = "select * from seasondb.season 
+			where seasondb.season.position = $1
+			order by seasondb.season.points desc";
 	$result = pg_prepare($conn,"players",$sql) or die('Could Not Prepare'.pg_last_error());
 	$result = pg_execute($conn,"players",array($q)) or die('Could Not Execute'.pg_last_error());
 	
@@ -33,6 +31,7 @@
 		<th style='text-align:center'>Rec</th>
 		<th style='text-align:center'>RecYD</th>
 		<th style='text-align:center'>RecTD</th>
+		<th style='text-align:center'>Points</th>
 		</tr>";
 	echo '<tbody>';
 	while($row = pg_fetch_array($result)){
@@ -52,6 +51,7 @@
 		echo "<td>".$row['rec']."</td>";
 		echo "<td>".$row['recyd']."</td>";
 		echo "<td>".$row['rectd']."</td>";
+		echo "<td>".$row['points']."</td>";
 		echo "</tr>";
 	}
 	echo "</tbody>";
