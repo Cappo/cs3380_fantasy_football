@@ -36,7 +36,6 @@
 		or die("Failed to create teams fetch query");
 	$teams = pg_execute($conn, 'league_teams', array($logged_in))
 		or die("Failed to execute teams fetch query");
-	$teams = pg_fetch_array($teams, NULL, PGSQL_ASSOC);
 	display_table($teams);
 	?>
 	
