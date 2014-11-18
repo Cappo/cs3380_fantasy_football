@@ -6,13 +6,19 @@ SET search_path TO master;
 
 -- Table: master.user_info
 -- Columns:
---    league          - The league for the account, supplied during registration.
+--    league          	- The league for the account, supplied during registration.
 --    registration_date - The date the user registered. Set automatically.
 --    description       - A user-supplied description.
+--    state 			- The game state. 0 = Team creation, 1 = Draft, 2 = Week-by-week play.
+--    turn   			- Holds the turn number that references the turn order in the teams DB.
+--    week   			- The week that the league is in.
 CREATE TABLE user_info (
 	league 				VARCHAR(100) PRIMARY KEY,
 	registration_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	description 		VARCHAR(500)
+	description 		VARCHAR(500),
+	state	INTEGER	DEFAULT 0,
+	turn	INTEGER	DEFAULT 1,
+	week	INTEGER	DEFAULT 1
 );
 
 -- Table: master.authentication
@@ -33,12 +39,14 @@ CREATE TABLE authentication (
 --    points 		- How many points the team has gotten that week. Default is 0 to start.
 --    num_players   - The number of players in the team
 --    turn_order    - 
-CREATE TABLE teams (
+--	  about			- A short description about the team
+CREATE TABLE team (
 	name 		VARCHAR(100) NOT NULL,
 	league		VARCHAR(100) NOT NULL,
 	points 		INTEGER DEFAULT 0,
 	num_players INTEGER DEFAULT 0,
 	turn_order	INTEGER,
+	about		VARCHAR(255),
 	PRIMARY KEY(name),
 	FOREIGN KEY(league) REFERENCES user_info(league)
 );
@@ -53,23 +61,9 @@ CREATE TABLE draft (
 	team		VARCHAR(100)	NOT NULL,
 	league		VARCHAR(100)	NOT NULL,
 	PRIMARY KEY (player_id,team),
-	FOREIGN KEY (team) REFERENCES teams(name),
+	FOREIGN KEY (team) REFERENCES team(name),
 	--FOREIGN KEY (player_id) REFERENCES ,
 	FOREIGN KEY (league) REFERENCES user_info(league)
-);
-
--- Table: master.league
--- Columns:
---    name    	- Name of the league we are keeping data for.
---    team 		- The game state. 0 = Team creation, 1 = Draft, 2 = Week-by-week play.
---    turn   	- Holds the turn number that references the turn order in the teams DB.
---    week   	- The week that the league is in.
-CREATE TABLE league (
-	name	VARCHAR(100)	NOT NULL,
-	state	INTEGER	DEFAULT 0,
-	turn	INTEGER	DEFAULT 1,
-	week	INTEGER	DEFAULT 1,
-	FOREIGN KEY (name) REFERENCES user_info(league)
 );
 
 -- Table: master.log

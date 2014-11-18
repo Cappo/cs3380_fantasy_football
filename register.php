@@ -47,11 +47,6 @@
 				or die("Failed to create authentication query");
 			$auth = pg_execute($conn, 'authentication', array($league, $hash, $salt))
 				or die("Failed to execute authentication query");
-				
-			$insert_league = pg_prepare($conn, 'league_q', "INSERT INTO master.league (name) VALUES ($1);")
-				or die("Failed to create league query");
-			$insert_league = pg_execute($conn, 'league_q', array($league))
-				or die("Failed to execute league query");
 			
 			// Start session and redirect to home.php
 			session_start();
@@ -71,7 +66,7 @@
 	</div>
 	<form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" >
 		<div class="form-group <?php if ($league_error) echo 'has-error'; ?>">
-			<label for="league" class="control-label">league</label>
+			<label for="league" class="control-label">League</label>
 			<input id="league" type="text" name="league" class="form-control" value="<?php echo $league; ?>" required>
 			<?php if ($league_error) echo '<p class="help-block">There is already an account with this league!</p>'; ?>
 		</div>

@@ -58,7 +58,7 @@
 	</div>
 	<form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" >
 		<div class="form-group <?php if ($league && $league_error) echo 'has-error'; ?>">
-			<label for="league" class="control-label">league</label>
+			<label for="league" class="control-label">League</label>
 			<input id="league" type="text" name="league" class="form-control" value="<?php echo $league; ?>" required>
 			<?php if ($league && $league_error) echo '<p class="help-block">Sorry, we have no record of this league in our database!</p>'; ?>
 		</div>

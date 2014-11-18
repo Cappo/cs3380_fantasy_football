@@ -30,8 +30,18 @@
 	echo "Registration date: " . $registration['registration_date'] . "<br>";	
 	?>
 	<br>
+	<?php
+	// Fetch teams for league
+	$teams = pg_prepare($conn, 'league_teams', "SELECT * FROM master.team WHERE league=$1;")
+		or die("Failed to create teams fetch query");
+	$teams = pg_execute($conn, 'league_teams', array($logged_in))
+		or die("Failed to execute teams fetch query");
+	$teams = pg_fetch_array($teams, NULL, PGSQL_ASSOC);
+	display_table($teams);
+	?>
+	
+	<a href="create_team.php" class="btn btn-default">Create Team</a>
 	<a href="logout.php" class="btn btn-danger">Logout</a>
-	<a href="update.php" class="btn btn-success">Update</a>
 </div>
 <?php
 	include_once('_SNIPPETS/footer.php');
