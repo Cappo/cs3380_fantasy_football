@@ -12,7 +12,7 @@
 ?>
 <div class="container">
 		<div class="jumbotron">
-		<h1><?php echo $logged_in; ?></h1>
+		<h1><?php echo $logged_in; echo $_SESSION['state']; ?></h1>
         <?php
 			switch($_SESSION['state']){
 				case 0:
