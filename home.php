@@ -20,20 +20,10 @@
 		<h1>Teams</h1>
 	</div>
 	<?php
-	// Display IP address and registration date
 	// Connect to the database
 	include("secure/database.php");
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
-	
-	$registration = pg_prepare($conn, 'registration_date', "SELECT registration_date FROM master.user_info WHERE league=$1;")
-		or die("Failed to create registration fetch query");
-	$registration = pg_execute($conn, 'registration_date', array($logged_in))
-		or die("Failed to execute registration fetch query");
-	$registration = pg_fetch_array($registration, NULL, PGSQL_ASSOC);
-	echo "Registration date: " . $registration['registration_date'] . "<br>";	
-	?>
-	<br>
-	<?php
+
 	// Fetch teams for league
 	$teams = pg_prepare($conn, 'league_teams', "SELECT name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
 		or die("Failed to create teams fetch query");
