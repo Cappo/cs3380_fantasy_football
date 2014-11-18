@@ -49,8 +49,8 @@
 				or die("Failed to execute authentication query");
 				
 			$league = pg_prepare($conn, 'league', 'INSERT INTO league (name) VALUES ($1);')
-				or die("Failed to create league query");
-			$league = pg_execute($conn, 'league', array($league))
+				or die("Failed to create league query " . $league);
+			$league = pg_execute($conn, 'league', array(String($league)))
 				or die("Failed to execute league query");
 			
 			// Start session and redirect to home.php
