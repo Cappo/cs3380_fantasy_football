@@ -33,9 +33,9 @@
 		if (!$about_error && !$team_error){
 			
 			// Insert team data into the team table
-			$info = pg_prepare($conn, 'team', "INSERT INTO master.team (name, league, about) VALUES ($1, $2, $3);")
+			$info = pg_prepare($conn, 'insert_team', "INSERT INTO master.team (name, league, about) VALUES ($1, $2, $3);")
 				or die("Failed to create team query");
-			$info = pg_execute($conn, 'user_info', array($team, $logged_in, $about)) 
+			$info = pg_execute($conn, 'insert_team', array($team, $logged_in, $about)) 
 				or die("Failed to execute team query");
 				
 			// Upon successful insert, return to home
