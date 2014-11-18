@@ -36,8 +36,8 @@
 	echo '<tbody>';
 	while($row = pg_fetch_array($result)){
 		echo "<tr align='center'>";
-		echo "<td>".$row['lname']."</td>";
 		echo "<td>".$row['fname']."</td>";
+		echo "<td>".$row['lname']."</td>";
 		echo "<td>".$row['team']."</td>";
 		echo "<td>".$row['g']."</td>";
 		echo "<td>".$row['comp']."</td>";
