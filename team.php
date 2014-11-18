@@ -7,34 +7,48 @@
 	$logged_in = empty($_SESSION['login']) ? false : $_SESSION['login'];
 	if (!$logged_in) header('location: index.php');
 	
+	// Connect to the database
+	include("secure/database.php");
+	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
+	
+	// Get the team we are looking at
+	$team = pg_prepare($conn, 'team', "SELECT * FROM master.team WHERE league=$1 AND team_id=$2;")
+		or die("Failed to create team fetch query");
+	$team = pg_execute($conn, 'team', array($logged_in, $_GET['team']))
+		or die("Failed to execute team fetch query");
+	$team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
+	
+	if (pg_num_rows($name) < 1) $team_error = true;
+	
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
 ?>
 <div class="container">
-		<div class="jumbotron">
-		<h1><?php echo $logged_in; ?></h1>
-		<p>Here it might say, DRAFT TIME! Or display the week number</p>
-		<p>This is also where there may be <span class="btn btn-default">Buttons</span> might be to progress to the next week or go to draft</p>
+<?php
+if (!$team_error){
+?>
+	<div class="jumbotron">
+		<h1><?php echo $team['name']; ?></h1>
+		<p>Total Points: <?php echo $team['points']; ?></p>
+		<p><?php echo $team['about']; ?></p>
 	</div>
 	<div class="page-header">
-		<h1>Teams</h1>
+		<h1>Players</h1>
 	</div>
 	<?php
-	// Connect to the database
-	include("secure/database.php");
-	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
-
-	// Fetch teams for league
-	$teams = pg_prepare($conn, 'league_teams', "SELECT name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
+	// Fetch players for team
+	$players = pg_prepare($conn, 'league_teams', "SELECT name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
 		or die("Failed to create teams fetch query");
-	$teams = pg_execute($conn, 'league_teams', array($logged_in))
+	$players = pg_execute($conn, 'league_teams', array($logged_in))
 		or die("Failed to execute teams fetch query");
-	display_table($teams);
+	display_table($players);
 	?>
-	
-	<a href="create_team.php" class="btn btn-default">Create Team</a>
-	<a href="logout.php" class="btn btn-danger">Logout</a>
 </div>
+<?php
+} else {
+	echo '<p class="alert alert-danger">No team with that id found in this league!</p>';	
+}
+?>
 <?php
 	include_once('_SNIPPETS/footer.php');
 	
@@ -54,10 +68,7 @@
 			do {
 				echo '<tr>';
 				foreach ($row as $key => $value){
-						if ($key == 'name')
-							echo '<td><a href="team.php?team='.$row['team_id'].'">'.$value.'</a></td>';
-						else
-							echo '<td>'.$value.'</td>';
+						echo '<td>'.$value.'</td>';
 				}
 				echo '</tr>';
 			} while($row = pg_fetch_array($result, NULL, PGSQL_ASSOC));

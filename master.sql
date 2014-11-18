@@ -17,8 +17,9 @@ CREATE TABLE user_info (
 	registration_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	description 		VARCHAR(500),
 	state	INTEGER	DEFAULT 0,
-	turn	INTEGER	DEFAULT 1,
-	week	INTEGER	DEFAULT 1
+	turn	INTEGER,
+	week	INTEGER	DEFAULT 1,
+	FOREIGN KEY (turn) REFERENCES team(team_id)
 );
 
 -- Table: master.authentication
@@ -76,7 +77,7 @@ CREATE TABLE draft (
 --    action     - What the user did to generate a log entry (i.e., "logged in").
 --CREATE TABLE master.log (
 --	log_id  	SERIAL PRIMARY KEY,
---	league 	VARCHAR(30) NOT NULL REFERENCES master.user_info,
+--	league 		VARCHAR(30) NOT NULL REFERENCES master.user_info,
 --	ip_address 	VARCHAR(15) NOT NULL,
 --	log_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 --	action 		VARCHAR(50) NOT NULL
