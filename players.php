@@ -10,17 +10,10 @@
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
 ?>
-
-		<!--This is the navbar-->
-		<nav class="navbar navbar-inverse" role="navigation">
-			<ul class="nav nav-pills nav-justified color">
-				<li role="presentation" class="active"><a href="#">Stats</a></li>
-				<li role="presentation"><a href="#">Home</a></li>
-				<li role="presentation"><a href="#">About</a></li>
-			</ul>
-		</nav>
-
-		<h1 id="header">2007 Players</h1><br>
+<div class="container">
+	<div class="page-header">
+		<h1>2007 Stats</h1>
+    </div>
 		
 		<!--dropdown which calls the function sending value of users choice-->
 		<form id="choice" style="float: left">
@@ -42,6 +35,7 @@
 		</form><br>
 		<div id="txtHint"><b></b></div>
 		<div id="livesearch"></div>
+</div>
         
 <?php
 	include_once('_SNIPPETS/footer.php');
