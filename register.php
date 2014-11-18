@@ -48,9 +48,9 @@
 			$auth = pg_execute($conn, 'authentication', array($league, $hash, $salt))
 				or die("Failed to execute authentication query");
 				
-			$insert_league = pg_prepare($conn, 'league', "INSERT INTO league (name) VALUES ($1);")
-				or die("Failed to create league query " . $league);
-			$insert_league = pg_execute($conn, 'league', array($league))
+			$insert_league = pg_prepare($conn, 'league_q', "INSERT INTO master.league (name) VALUES ($1);")
+				or die("Failed to create league query");
+			$insert_league = pg_execute($conn, 'league_q', array($league))
 				or die("Failed to execute league query");
 			
 			// Start session and redirect to home.php
