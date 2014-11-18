@@ -2,10 +2,9 @@
 	//get value from the dropdown box
 	$q = strval($_GET['q']);
 	
-	
-	
 	//connect to database
-
+	include("secure/database.php");
+	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql uses the value from dropdown for the position
 	$sql = "select * from gamedb.test 

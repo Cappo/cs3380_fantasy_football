@@ -2,9 +2,9 @@
 	//get user search box text
 	$z= htmlspecialchars(strval($_GET['z']));
 
-	
 	//connect to database
-
+	include("secure/database.php");
+	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql to search first and last name 
 	$sql = "select * from gamedb.test
