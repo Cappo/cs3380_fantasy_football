@@ -37,20 +37,22 @@
 				// Start session and redirect to home.php
 				$_SESSION['login'] = $league;
 				// Get game state and add that to session as well
-				$game_state = pg_prepare($conn, 'state', "SELECT state FROM master.user_info WHERE league=$1;")
+				$game_state = pg_prepare($conn, 'state', "SELECT state,turn,week FROM master.user_info WHERE league=$1;")
 					or die("Failed to create state query");
 				$game_state = pg_execute($conn, 'state', array($league))
 					or die("Failed to execute state query");
 				$game_state = pg_fetch_array($game_state, NULL, PGSQL_ASSOC);
-				$_SESSION['state'] = $game_state['state'];
+				$_SESSION['state'] = $game_state['state']; // State is the game state 0: team creation 1: draft 2: week simulation
+				$_SESSION['draft'] = $game_state['turn']; // Turn is the draft turn
+				$_SESSION['week'] = $game_state['week']; // Weed is the actual week of play
 				header('location: home.php');
 			} else {
 				$password_error = true;
-				// Record the unsuccessful login to the log
+				/* Record the unsuccessful login to the log
 				$log = pg_prepare($conn, 'log', "INSERT INTO master.log (league, ip_address, action) VALUES ($1, $2, 'failed login');")
 					or die("Failed to create log query");
 				$log = pg_execute($conn, 'log', array($league, $_SERVER['REMOTE_ADDR'])) // We will use default values for log_id and log_date
-					or die("Failed to execute log query");
+					or die("Failed to execute log query");*/
 			}
 		}
 	}

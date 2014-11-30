@@ -19,10 +19,10 @@
 					echo '<p>Team creation!</p><br><a href="draft.php" class="btn btn-default">Go to draft</a>';
 					break;
 				case 1:
-					echo '<p>Draft!</p><br><a href="draft.php" class="btn btn-default">Back to draft</a>';
+					echo '<p>Draft!</p><br><small>Round '.$_SESSION['draft'].'<small><br><a href="draft.php" class="btn btn-default">Back to draft</a>';
 					break;
 				case 2:
-					echo '<p>Week #!</p><br><a href="#" clas="btn btn-default">Next week</a>';
+					echo '<p>Week '.$_SESSION['week'].'!</p><br><a href="#" clas="btn btn-default">Next week</a>';
 					break;
 			}
 		?>

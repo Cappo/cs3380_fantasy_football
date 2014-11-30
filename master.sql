@@ -16,9 +16,9 @@ CREATE TABLE user_info (
 	league 				VARCHAR(100) PRIMARY KEY,
 	registration_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	description 		VARCHAR(500),
-	state	INTEGER	DEFAULT 0,
-	turn	INTEGER,
-	week	INTEGER	DEFAULT 1,
+	state				INTEGER	DEFAULT 0,
+	turn				INTEGER,
+	week				INTEGER	DEFAULT 1,
 	FOREIGN KEY (turn) REFERENCES team(team_id)
 );
 

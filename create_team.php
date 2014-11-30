@@ -25,7 +25,7 @@
 		// Make sure that the team name is available (does not already exist)
 		$name = pg_prepare($conn, 'team', "SELECT league FROM master.team WHERE name=$1 AND league=$2;")
 			or die("Failed to create team check query");
-		$name = pg_execute($conn, 'team', array($team, $logged_in)) // Registration date will default to now
+		$name = pg_execute($conn, 'team', array($team, $logged_in))
 			or die("Failed to execute team check query");
 		if (pg_num_rows($name) > 0) $team_error = true;
 		
@@ -33,11 +33,13 @@
 		if (strlen($about) > 255) $about_error = true;
 		
 		if (!$about_error && !$team_error){
-			
+			$seed = floor(time());
+			srand($seed);
+			$random = rand();
 			// Insert team data into the team table
-			$info = pg_prepare($conn, 'insert_team', "INSERT INTO master.team (name, league, about) VALUES ($1, $2, $3);")
+			$info = pg_prepare($conn, 'insert_team', "INSERT INTO master.team (name, league, about, turn_order) VALUES ($1, $2, $3);")
 				or die("Failed to create team query");
-			$info = pg_execute($conn, 'insert_team', array($team, $logged_in, $about)) 
+			$info = pg_execute($conn, 'insert_team', array($team, $logged_in, $about, $random)) 
 				or die("Failed to execute team query");
 				
 			// Upon successful insert, return to home
