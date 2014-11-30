@@ -14,7 +14,7 @@
 	
 	// If this is the first time seeing draft view, we must set the database to know we have gone into draft mode
 	if ($_SESSION['state'] == 0){
-		$update = pg_prepare($conn, 'update', "UPDATE master.user_info SET state=1,draft=1 WHERE league=$1;")
+		$update = pg_prepare($conn, 'update', "UPDATE master.user_info SET state=1,round=1 WHERE league=$1;")
 			or die("Failed to create state update query");
 		$update = pg_execute($conn, 'update', array($logged_in))
 			or die("Failed to execute state update query");

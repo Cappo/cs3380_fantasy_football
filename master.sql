@@ -10,14 +10,14 @@ SET search_path TO master;
 --    registration_date - The date the user registered. Set automatically.
 --    description       - A user-supplied description.
 --    state 			- The game state. 0 = Team creation, 1 = Draft, 2 = Week-by-week play.
---    turn   			- Holds the turn number that references the turn order in the teams DB.
+--    round   			- The draft round number (Only looked at if state = 1)
 --    week   			- The week that the league is in.
 CREATE TABLE user_info (
 	league 				VARCHAR(100) PRIMARY KEY,
 	registration_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	description 		VARCHAR(500),
 	state				INTEGER	DEFAULT 0,
-	turn				INTEGER,
+	round				INTEGER,
 	week				INTEGER	DEFAULT 1
 );
 
