@@ -58,7 +58,7 @@ CREATE TABLE team (
 --    team 			- Name of team the player was drafted for. References team list.
 --    league   		- The name of the league the player was drafted in. References the user_info table.
 CREATE TABLE draft (
-	player_id	VARCHAR(3)		NOT NULL,
+	player_id	VARCHAR(10)		NOT NULL,
 	team_id		INTEGER			NOT NULL,
 	league		VARCHAR(100)	NOT NULL,
 	PRIMARY KEY (player_id,team_id),
