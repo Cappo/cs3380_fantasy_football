@@ -50,25 +50,24 @@
 			xmlhttp.open("GET","search.php?z="+str,true);
 			xmlhttp.send();
 		}
-		//search box function is same as dropdown function
 		function showDraft(str) {
-			if (str.length==0) { 
-				document.getElementById("livesearch").innerHTML="";
-				document.getElementById("livesearch").style.border="0px";
+			if (str=="") {//if nothing chosen then nothing displays
+				document.getElementById("txtHint").innerHTML="";
 				return;
-			}
+			} 
 			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
 				xmlhttp=new XMLHttpRequest();
-			} else {  // code for IE6, IE5
+			} else { // code for IE6, IE5
 				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 			}
 			xmlhttp.onreadystatechange=function() {
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					document.getElementById("livesearch").innerHTML=xmlhttp.responseText;
+					document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
 				}
 			}
-			//sends z over to search.php
-			xmlhttp.open("GET","draft_table.php?z="+str,true);
+			//this will pass the value q(value of dropdown box) to user.php
+			xmlhttp.open("GET","draft_table.php?q="+str,true);
 			xmlhttp.send();
 		}
 	</script>
