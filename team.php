@@ -36,10 +36,10 @@ if (!$team_error){
 	</div>
 	<?php
 	// Fetch players for team
-	$players = pg_prepare($conn, 'league_teams', "SELECT name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
-		or die("Failed to create teams fetch query");
-	$players = pg_execute($conn, 'league_teams', array($logged_in))
-		or die("Failed to execute teams fetch query");
+	$players = pg_prepare($conn, 'team_players', "SELECT player_id FROM master.draft WHERE league=$1 AND team_id=$2;")
+		or die("Failed to create players fetch query");
+	$players = pg_execute($conn, 'team_players', array($logged_in,intval($_GET['team'])))
+		or die("Failed to execute players fetch query");
 	display_table($players);
 	?>
 </div>
