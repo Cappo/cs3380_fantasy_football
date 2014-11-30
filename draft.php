@@ -10,6 +10,17 @@
 	// Connect to the database
 	include("secure/database.php");
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
+	
+	
+	// If this is the first time seeing draft view, we must set the database to know we have gone into draft mode
+	if ($_SESSION['state'] == 0){
+		$update = pg_prepare($conn, 'update', "UPDATE master.user_info SET state=1,draft=1 WHERE league=$1;")
+			or die("Failed to create state update query");
+		$update = pg_execute($conn, 'update', array($logged_in))
+			or die("Failed to execute state update query");
+		$_SESSION['state'] = 1;
+		$_SESSION['draft'] = 1;
+	}
 
 	$draft = $_SESSION['draft'];
 	$draft = $draft - 1;
@@ -27,7 +38,7 @@
 	<div class="jumbotron">
 		<?php
 			echo '<h1>Draft</h1><br>';
-			echo '<small>Round '.$_SESSION['draft'].'<small><br>';
+			echo '<small>Round '.$_SESSION['draft'].'</small><br>';
 			echo $draft_team['name'];
 		?>
 	</div>
