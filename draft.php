@@ -25,11 +25,11 @@
 
 	// Determine draft round and what team is drafting
 	$draft = $_SESSION['draft'];
-	$draft = $draft - 1;
+	$looking_for = $draft - 1;
 	// Fetch teams for league
 	$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 AND num_players=$2 ORDER BY turn_order DESC LIMIT 1;")
 		or die("Failed to create draft team query".pg_last_error());
-	$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
+	$team = pg_execute($conn, 'draft_team', array($logged_in, intval($looking_for)))
 		or die("Failed to execute draft team query".pg_last_error());
 	$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	
@@ -57,7 +57,7 @@
 	$num_rows = pg_num_rows($team);
 	if ($num_rows == 0){
 		$draft = $draft + 1;
-		$_SESSION['draft'] = $draft;
+		$_SESSION['draft'] = intval($draft);
 		$draft = pg_prepare($conn, 'draft_update', "UPDATE master.user_info SET round=$1 WHERE league=$2;")
 			or die("Failed to create draft update query".pg_last_error());
 		$draft = pg_execute($conn, 'draft_update', array(intval($draft),$logged_in))
