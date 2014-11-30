@@ -55,7 +55,7 @@
 	}
 	
 	// If draft_team returned no rows then we have moved on to the next draft round!
-	$num_rows = pg_num_rows($draft_team);
+	$num_rows = pg_num_rows($team);
 	if ($num_rows == 0){
 		$draft++;
 		$_SESSION['draft'] = $_SESSION['draft'] + 1;
