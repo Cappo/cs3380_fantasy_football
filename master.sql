@@ -18,8 +18,7 @@ CREATE TABLE user_info (
 	description 		VARCHAR(500),
 	state				INTEGER	DEFAULT 0,
 	turn				INTEGER,
-	week				INTEGER	DEFAULT 1,
-	FOREIGN KEY (turn) REFERENCES team(team_id)
+	week				INTEGER	DEFAULT 1
 );
 
 -- Table: master.authentication
