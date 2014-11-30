@@ -37,7 +37,7 @@
 			srand($seed);
 			$random = rand();
 			// Insert team data into the team table
-			$info = pg_prepare($conn, 'insert_team', "INSERT INTO master.team (name, league, about, turn_order) VALUES ($1, $2, $3);")
+			$info = pg_prepare($conn, 'insert_team', "INSERT INTO master.team (name, league, about, turn_order) VALUES ($1, $2, $3, $4);")
 				or die("Failed to create team query");
 			$info = pg_execute($conn, 'insert_team', array($team, $logged_in, $about, $random)) 
 				or die("Failed to execute team query");
