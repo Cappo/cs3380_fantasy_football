@@ -13,6 +13,7 @@
 	
 	
 	// If this is the first time seeing draft view, we must set the database to know we have gone into draft mode
+	// First fetch number of teams in league, we can't start a draft with less than 2 teams!
 	if ($_SESSION['state'] == 0){
 		$update = pg_prepare($conn, 'update', "UPDATE master.user_info SET state=1,round=1 WHERE league=$1;")
 			or die("Failed to create state update query");
@@ -49,11 +50,11 @@
 	
 	// If someone selected to draft a player, we must add that player draft to the database
 	if (isset($_POST['submit'])){
-		$player_id = $_POST['id'];
+		$player_id = $_POST['player_id'];
 		// First update the draft table to show draft selection
 		$sql = pg_prepare($conn, 'draft_player', "INSERT INTO master.draft VALUES ($1,$2,$3)")
 			or die("Failed to create draft player query");
-		$sql = pg_execute($conn, 'draft_player', array(intval($player_id),intval($draft_team['team_id']),$logged_in))
+		$sql = pg_execute($conn, 'draft_player', array($player_id,intval($draft_team['team_id']),$logged_in))
 			or die("Failed to execute draft player query".pg_last_error());
 		// !!!  This next part could eventually be replaced by an SQL trigger function  !!!
 		// We must increment the number of players of the team

@@ -56,7 +56,7 @@
 		echo "<td>".$row['recyd']."</td>";
 		echo "<td>".$row['rectd']."</td>";
 		echo "<td>".$row['points']."</td>";
-		echo "<td><form method='POST' action='draft.php'><input type='hidden' name='id' value='".$row['id']."'><input type='submit' name='submit' class='btn btn-success' value='Draft' /></form></td>";
+		echo "<td><form method='POST' action='draft.php'><input type='hidden' name='player_id' value='".$row['id']."'/><input type='submit' name='submit' class='btn btn-success' value='Draft' /></form></td>";
 		echo "</tr>";
 	}
 	echo "</tbody>";
