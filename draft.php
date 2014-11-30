@@ -18,15 +18,17 @@
 		or die("Failed to create draft team query");
 	$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
 		or die("Failed to execute draft team query");
+	$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	
 	// Display the login form
 	include_once('_SNIPPETS/head.php');
 ?>
 <div class="container">
 	<div class="jumbotron">
-		<h1>Draft</h1>
-        <?php
-			// Display name of team that is drafting
+		<?php
+			echo '<h1>Draft</h1><br>';
+			echo '<small>Round '.$_SESSION['draft'].'<small><br>';
+			echo $draft_team['name'];
 		?>
 	</div>
 	<div class="page-header">

@@ -50,6 +50,27 @@
 			xmlhttp.open("GET","search.php?z="+str,true);
 			xmlhttp.send();
 		}
+		//search box function is same as dropdown function
+		function showDraft(str) {
+			if (str.length==0) { 
+				document.getElementById("livesearch").innerHTML="";
+				document.getElementById("livesearch").style.border="0px";
+				return;
+			}
+			if (window.XMLHttpRequest) {
+				xmlhttp=new XMLHttpRequest();
+			} else {  // code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function() {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("livesearch").innerHTML=xmlhttp.responseText;
+				}
+			}
+			//sends z over to search.php
+			xmlhttp.open("GET","draft_table.php?z="+str,true);
+			xmlhttp.send();
+		}
 	</script>
 <!--    <style>
 		#header{
