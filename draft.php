@@ -14,7 +14,7 @@
 	$draft = $_SESSION['draft'];
 	$draft = $draft - 1;
 	// Fetch teams for league
-	$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 AND players=($2) ORDER BY turn DESC LIMIT 1;")
+	$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 AND players=$2 ORDER BY turn DESC LIMIT 1;")
 		or die("Failed to create draft team query");
 	$team = pg_execute($conn, 'draft_team', array($logged_in, $draft))
 		or die("Failed to execute draft team query");
