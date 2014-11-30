@@ -48,7 +48,7 @@
 		
 		<!--dropdown which calls the function sending value of users choice-->
 		<form id="choice" style="float: left">
-			<select class="form-control" name="users" onchange="showUser(this.value)">
+			<select class="form-control" name="users" onchange="showDraft(this.value)">
 			<option value="">Select a position:</option>
 			<option value="qb">QB</option>
 			<option value="wr">WR</option>
