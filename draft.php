@@ -55,19 +55,19 @@
 		// First update the draft table to show draft selection
 		$sql = pg_prepare($conn, 'draft_player', "INSERT INTO master.draft VALUES ($1,$2,$3)")
 			or die("Failed to create draft player query");
-		$sql = pg_execute($conn, 'draft_player', array($player_id,intval($draft_team['team_id']),$logged_in))
-			or die("Failed to execute draft player query");
+		$sql = pg_execute($conn, 'draft_player', array(intval($player_id),intval($draft_team['team_id']),$logged_in))
+			or die("Failed to execute draft player query".pg_last_error());
 		// !!!  This next part could eventually be replaced by an SQL trigger function  !!!
 		// We must increment the number of players of the team
 		$sql = pg_prepare($conn, 'draft_player', "INSERT INTO master.draft VALUES ($1,$2,$3)")
-			or die("Failed to create draft player query");
+			or die("Failed to create draft player query".pg_last_error());
 		$sql = pg_execute($conn, 'draft_player', array($player_id,intval($draft_team['team_id']),$logged_in))
-			or die("Failed to execute draft player query");
+			or die("Failed to execute draft player query".pg_last_error());
 		// Now we need to get the next team in line
 		$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 AND num_players=$2 ORDER BY turn_order DESC LIMIT 1;")
-			or die("Failed to create draft team query");
+			or die("Failed to create draft team query".pg_last_error());
 		$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
-			or die("Failed to execute draft team query");
+			or die("Failed to execute draft team query".pg_last_error());
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	}
 	
