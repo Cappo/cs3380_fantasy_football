@@ -60,7 +60,7 @@
 		$_SESSION['draft'] = $draft;
 		$draft = pg_prepare($conn, 'draft_update', "UPDATE master.user_info SET round=$1 WHERE league=$2;")
 			or die("Failed to create draft update query".pg_last_error());
-		$draft = pg_execute($conn, 'draft_update', array($draft,$logged_in))
+		$draft = pg_execute($conn, 'draft_update', array(intval($draft),$logged_in))
 			or die("Failed to execute draft update query".pg_last_error());
 		// Now we need to get the next team in line, should start draft order over
 		$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
