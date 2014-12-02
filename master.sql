@@ -44,7 +44,7 @@ CREATE TABLE team (
 	team_id		SERIAL,
 	name 		VARCHAR(100) NOT NULL,
 	league		VARCHAR(100) NOT NULL,
-	points 		INTEGER DEFAULT 0,
+	points 		FLOAT DEFAULT 0,
 	num_players INTEGER DEFAULT 0,
 	turn_order	INTEGER,
 	about		VARCHAR(255),
