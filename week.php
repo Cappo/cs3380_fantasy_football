@@ -36,7 +36,7 @@
 	
 	
 	// Set next week
-	$_SESSION['week']++;,
+	$_SESSION['week']++;
 	$update = pg_prepare($conn, 'update', "UPDATE master.user_info SET week=$2 WHERE league=$1;")
 		or die("Failed to create state update query");
 	$update = pg_execute($conn, 'update', array($logged_in,$_SESSION['week']))
