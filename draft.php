@@ -49,7 +49,7 @@
 		$sql = pg_execute($conn, 'update_team_players', array(intval($draft_team['num_players'])+1,intval($draft_team['team_id'])))
 			or die("Failed to execute update team players query".pg_last_error());
 		// Now we need to get the next team in line
-		$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
+		$team = pg_execute($conn, 'draft_team', array($logged_in))
 			or die("Failed to execute draft team query".pg_last_error());
 		$num_rows = pg_num_rows($team);
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
@@ -64,7 +64,7 @@
 		$draft = pg_execute($conn, 'draft_update', array(intval($_SESSION['draft']),$logged_in))
 			or die("Failed to execute draft update query".pg_last_error());
 		// Now we need to get the next team in line, should start draft order over
-		$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
+		$team = pg_execute($conn, 'draft_team', array($logged_in))
 			or die("Failed to execute draft team query".pg_last_error());
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	}
