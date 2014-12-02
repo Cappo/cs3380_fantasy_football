@@ -29,7 +29,7 @@
 	// Fetch teams for league
 	$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 ORDER BY num_players ASC,turn_order DESC LIMIT 1;")
 		or die("Failed to create draft team query".pg_last_error());
-	$team = pg_execute($conn, 'draft_team', array($logged_in, intval($looking_for)))
+	$team = pg_execute($conn, 'draft_team', array($logged_in))
 		or die("Failed to execute draft team query".pg_last_error());
 	$num_rows = pg_num_rows($team);
 	$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
