@@ -81,6 +81,7 @@
 		$players = pg_execute($conn, 'get_players', array($team['team_id'])) or die("Failed to execute get players query".pg_last_error());
 		$player = pg_fetch_array($players, NULL, PGSQL_ASSOC);
 		do {
+			if ($player['points'] == NULL) $player['points'] = 0;
 			$points = pg_execute($conn, 'put_points', array($player['points'],$team['team_id'])) or die("Failed to execute points update query".pg_last_error());
 		} while ($player = pg_fetch_array($players, NULL, PGSQL_ASSOC));
 	} while ($team = pg_fetch_array($teams, NULL, PGSQL_ASSOC));
