@@ -56,7 +56,7 @@ echo'</div>';
 		<h1>Trade</h1>
 	</div>
 <?php
-if ($trade_success) echo '<p class="alert alert-success">Trade successful!</p>';
+if ($trade_success) echo '<p class="alert alert-success">Trade successful!</p><p><a href="index.php" class="btn btn-default">Home</a></p>';
 if (isset($_POST['submit_teams']) && !$team_error){
 echo'
 		<form class="form" method="POST" action="trade.php">
