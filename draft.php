@@ -24,7 +24,7 @@
 	}
 
 	// Determine draft round and what team is drafting
-	$draft = $_SESSION['draft'];
+	$draft = intval($_SESSION['draft']);
 	$looking_for = $draft - 1;
 	// Fetch teams for league
 	$team = pg_prepare($conn, 'draft_team', "SELECT * FROM master.team WHERE league=$1 AND num_players<$2 ORDER BY num_players ASC,turn_order DESC LIMIT 1;")
