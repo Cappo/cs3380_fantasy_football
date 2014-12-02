@@ -10,7 +10,7 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql uses the value from dropdown for the position
-	$sql = "select * from seasondb.season LEFT OUTER JOIN (select * from master.draft where master.draft.league=$2) AS Draft ON seasondb.season.id=Draft.player_id
+	$sql = "select * from seasondb.season FULL OUTER JOIN (select * from master.draft where master.draft.league=$2) AS Draft ON seasondb.season.id=Draft.player_id
 			where seasondb.season.position = $1
 			order by seasondb.season.points desc";
 	$result = pg_prepare($conn,"players",$sql) or die('Could Not Prepare'.pg_last_error());
