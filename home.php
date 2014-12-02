@@ -22,7 +22,7 @@
 					echo '<p>Draft - Round '.$_SESSION['draft'].'</p><br><a href="draft.php" class="btn btn-default">Back to draft</a>';
 					break;
 				case 2:
-					echo '<p>Week '.$_SESSION['week'].'!</p><br><a href="#" clas="btn btn-default">Next week</a>';
+					echo '<p>Week '.$_SESSION['week'].'!</p><br><a href="week.php" class="btn btn-default">Next week</a>';
 					break;
 				case 3:
 					echo '<p>Season over!</p>';
