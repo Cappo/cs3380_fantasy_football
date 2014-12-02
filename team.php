@@ -36,7 +36,7 @@ if (!$team_error){
 	</div>
 	<?php
 	// Fetch players for team
-	$players = pg_prepare($conn, 'team_players', "SELECT * FROM seasondb.season INNER JOIN (select player_id FROM master.draft WHERE league=$1 AND team_id=$2) AS Draft ON seasondb.season.id=Draft.player_id;")
+	$players = pg_prepare($conn, 'team_players', "SELECT lname AS Last_Name,fname AS First_Name,team,position FROM seasondb.season INNER JOIN (select player_id FROM master.draft WHERE league=$1 AND team_id=$2) AS Draft ON seasondb.season.id=Draft.player_id;")
 		or die("Failed to create players fetch query");
 	$players = pg_execute($conn, 'team_players', array($logged_in,intval($_GET['team'])))
 		or die("Failed to execute players fetch query");
