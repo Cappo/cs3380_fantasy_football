@@ -17,7 +17,7 @@
 	if (isset($_POST['submit_teams'])){
 		if ($_POST['team1'] == $_POST['team2']) $team_error = true;
 	} else if (isset($_POST['submit_players'])){
-		
+		echo 'trading '.$_POST['player1'].' and '.$_POST['player2'];
 	}
 	
 	include_once('_SNIPPETS/head.php');
