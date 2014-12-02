@@ -44,7 +44,7 @@
 			or die("Failed to execute draft team query".pg_last_error());
 		$num_rows = pg_num_rows($team);
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
-	}*/
+	}*/b
 	
 	include_once('_SNIPPETS/head.php');
 ?>
@@ -57,13 +57,13 @@ echo'<form action="trade.php">
 			$teams = pg_prepare($conn, 'trade_teams', "SELECT team_id,name FROM master.team WHERE league=$1;") or die("Failed to create draft team query".pg_last_error());
 			$teams = pg_execute($conn, 'trade_teams', array($logged_in)) or die("Failed to execute draft team query".pg_last_error());
 			while($team = pg_fetch_array($teams, NULL, PGSQL_ASSOCb)){
-			echo'<option value="'.team['team_id'].'">'.team['name'].'</option>';
+			echo'<option value="'.$team['team_id'].'">'.$team['name'].'</option>';
 			}
 echo '		</select>
 			<select class="form-control" name="team2">';
 			$teams = pg_execute($conn, 'trade_teams', array($logged_in)) or die("Failed to execute draft team query".pg_last_error());
 			while($team = pg_fetch_array($teams, NULL, PGSQL_ASSOCb)){
-			echo'<option value="'.team['team_id'].'">'.team['name'].'</option>';
+			echo'<option value="'.$team['team_id'].'">'.$team['name'].'</option>';
 			}
 echo '		</select>
 			<input class="btn btn-warning" name="submit_teams" value="Trade">
