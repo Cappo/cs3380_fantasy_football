@@ -17,7 +17,12 @@
 	if (isset($_POST['submit_teams'])){
 		if ($_POST['team1'] == $_POST['team2']) $team_error = true;
 	} else if (isset($_POST['submit_players'])){
-		echo 'trading '.$_POST['player1'].' and '.$_POST['player2'];
+		// Trade the players (swap team_id in master.draft table)
+		$update1 = pg_prepare($conn, 'update1', "UPDATE master.draft SET team_id=$1 WHERE team_id=$2 AND player_id=$3;") or die("Failed to create draft team query".pg_last_error());
+		$update1 = pg_execute($conn, 'update1', array($_POST['team_id2'],$_POST['team_id1'],$_POST['player2'])) or die("Failed to execute draft team query".pg_last_error());
+		$update2 = pg_prepare($conn, 'update2', "UPDATE master.draft SET team_id=$1 WHERE team_id=$2 AND player_id=$3;") or die("Failed to create draft team query".pg_last_error());
+		$update2 = pg_execute($conn, 'update2', array($_POST['team_id1'],$_POST['team_id2'],$_POST['player1'])) or die("Failed to execute draft team query".pg_last_error());
+		$trade_success = true;
 	}
 	
 	include_once('_SNIPPETS/head.php');
@@ -27,6 +32,8 @@
 echo'<div class="jumbotron"><h1>Trade<br><small>Pick teams below</small></h1>';
 if ($team_error) echo '<p class="alert alert-danger">You cannot trade to the same team!</p>';
 echo'<form class="form" method="POST" action="trade.php">
+		<input type="hidden" name="team_id1" value="'.$_POST['team1'].'">
+		<input type="hidden" name="team_id2" value="'.$_POST['team2'].'">
 		<div class="form-group">
 			<select class="form-control" name="team1">';
 			//select all teams, display
@@ -51,6 +58,7 @@ echo'</div>';
 		<h1>Trade</h1>
 	</div>
 <?php
+if ($trade_success) echo '<p class="alert alert-success">Trade successful!</p>';
 if (isset($_POST['submit_teams']) && !$team_error){
 echo'
 		<form class="form" method="POST" action="trade.php">
