@@ -72,11 +72,12 @@
 		
 		// Check to see if that was our last round
 		if ($_SESSION['draft'] > 4){
-			$update2 = pg_prepare($conn, 'update2', "UPDATE master.user_info SET state=2 WHERE league=$1;")
+			$update2 = pg_prepare($conn, 'update2', "UPDATE master.user_info SET state=2,week=1 WHERE league=$1;")
 				or die("Failed to create state update query");
 			$update2 = pg_execute($conn, 'update2', array($logged_in))
 				or die("Failed to execute state update query");
 			$_SESSION['state'] = 2;
+			$_SESSION['week'] = 1;
 			header('location:index.php');
 		}
 	}
