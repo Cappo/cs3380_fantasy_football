@@ -25,7 +25,7 @@
 					echo '<p>Week '.$_SESSION['week'].'!</p><br><a href="week.php" class="btn btn-default">Next week</a>';
 					break;
 				case 3:
-					echo '<p>Season over!</p>';
+					echo '<p>Season over! See teams below for winner.</p>';
 					break;
 			}
 		?>

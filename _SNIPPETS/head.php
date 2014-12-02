@@ -98,7 +98,7 @@
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="home.php">Fantasy Football</a>
+			<a class="navbar-brand" href="home.php">Fantasy Football Simulator</a>
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
