@@ -10,11 +10,11 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 	
 	//sql uses the value from dropdown for the position
-	$sql = "select * from seasondb.season 
+	$sql = "select * from seasondb.season LEFT JOIN (select * from master.draft where master.draft.league=$2) ON seasondb.id=master.draft.id
 			where seasondb.season.position = $1
 			order by seasondb.season.points desc";
 	$result = pg_prepare($conn,"players",$sql) or die('Could Not Prepare'.pg_last_error());
-	$result = pg_execute($conn,"players",array($q)) or die('Could Not Execute'.pg_last_error());
+	$result = pg_execute($conn,"players",array($q,$_SESSION['login'])) or die('Could Not Execute'.pg_last_error());
 	
 	//the echos are long, but I took out POS column....might haven taken more out cant remember 
 	echo "<table align='center' class='table table-hover table-striped table-bordered'>

@@ -43,7 +43,7 @@
 		echo "<td>".$row['fname']."</td>";
 		echo "<td>".$row['lname']."</td>";
 		echo "<td>".$row['team']."</td>";
-		echo "<td>".$row['pos']."</td>";
+		echo "<td>".$row['position']."</td>";
 		echo "<td>".$row['g']."</td>";
 		echo "<td>".$row['comp']."</td>";
 		echo "<td>".$row['att']."</td>";
