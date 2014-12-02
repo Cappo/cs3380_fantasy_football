@@ -57,7 +57,7 @@
 	
 	// If draft_team returned no rows then we have moved on to the next draft round!
 	
-	if ($num_rows == 0){
+	if ($num_rows < 1){
 		$draft = $draft + 1;
 		$_SESSION['draft'] = intval($draft);
 		$draft = pg_prepare($conn, 'draft_update', "UPDATE master.user_info SET round=$1 WHERE league=$2;")
