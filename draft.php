@@ -31,6 +31,7 @@
 		or die("Failed to create draft team query".pg_last_error());
 	$team = pg_execute($conn, 'draft_team', array($logged_in, intval($looking_for)))
 		or die("Failed to execute draft team query".pg_last_error());
+	$num_rows = pg_num_rows($team);
 	$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	
 	// If someone selected to draft a player, we must add that player draft to the database
@@ -50,11 +51,12 @@
 		// Now we need to get the next team in line
 		$team = pg_execute($conn, 'draft_team', array($logged_in, intval($draft)))
 			or die("Failed to execute draft team query".pg_last_error());
+		$num_rows = pg_num_rows($team);
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
 	}
 	
 	// If draft_team returned no rows then we have moved on to the next draft round!
-	$num_rows = pg_num_rows($team);
+	
 	if ($num_rows == 0){
 		$draft = $draft + 1;
 		$_SESSION['draft'] = intval($draft);
