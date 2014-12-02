@@ -44,7 +44,7 @@
 			or die("Failed to execute draft team query".pg_last_error());
 		$num_rows = pg_num_rows($team);
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
-	}*/b
+	}*/
 	
 	include_once('_SNIPPETS/head.php');
 ?>
