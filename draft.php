@@ -102,20 +102,14 @@
 			<option value="">Select a position:</option>
 			<option value="qb">QB</option>
 			<option value="wr">WR</option>
-			<option value="fb">FB</option>
 			<option value="rb">RB</option>
 			<option value="te">TE</option>
-			<option value="p">P</option>
-			<option value="lb">LB</option>
 			</select>
 		</form>
 		
-		<!--form for the search box-->
-		<form style="float: right">
-			<input class="form-control" placeholder="Search Name" type="text" size="30" onkeyup="showResult(this.value)">
-		</form><br>
+		<br>
+		<hr>
 		<div id="txtHint"><b></b></div>
-		<div id="livesearch"></div>
 </div>
         
 <?php
