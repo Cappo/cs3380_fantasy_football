@@ -25,53 +25,53 @@
 	$teams = pg_execute($conn, 'get_teams', array($logged_in)) or die("Failed to execute state update query");
 	$team = pg_fetch_array($teams, NULL, PGSQL_ASSOC);
 	do{
-		switch ($_SESSION['week']){
+		switch (intval($_SESSION['week'])){
 			case 1:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek1 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek1.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
 			case 2:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek2 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek2.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 3:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek3 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek3.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 4:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek4 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek4.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 5:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek5 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek5.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 6:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek6 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek6.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 7:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek7 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek7.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 8:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek8 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek8.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 9:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek9 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek9.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 10:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek10 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek10.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 11:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek11 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek11.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 12:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek12 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek12.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 13:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek13 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek13.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 14:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek14 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek14.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 15:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek15 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek15.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
-			case 2:
+			case 16:
 				$players = pg_prepare($conn, 'get_players', "SELECT points FROM gamedb.gameweek16 RIGHT JOIN (SELECT * FROM master.draft WHERE master.draft.team_id=$2) AS Draft ON gamedb.gameweek16.id=Draft.player_id;") or die("Failed to create get players query".pg_last_error());
 				break;
 		}
