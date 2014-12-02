@@ -39,7 +39,7 @@
 	$conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die("Failed to connect to the database");
 
 	// Fetch teams for league
-	$teams = pg_prepare($conn, 'league_teams', "SELECT team_id,name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1;")
+	$teams = pg_prepare($conn, 'league_teams', "SELECT team_id,name AS Name,points AS Points,num_players AS Players,about AS About FROM master.team WHERE league=$1 ORDER BY points DESC;")
 		or die("Failed to create teams fetch query");
 	$teams = pg_execute($conn, 'league_teams', array($logged_in))
 		or die("Failed to execute teams fetch query");
