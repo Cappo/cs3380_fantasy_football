@@ -22,6 +22,8 @@
 		$_SESSION['state'] = 1;
 		$_SESSION['draft'] = 1;
 	}
+	// If the game state is not right, then don't let us here!
+	if ($_SESSION['state'] != 1) header('location:index.php');
 
 	// Determine draft round and what team is drafting
 	$draft = $_SESSION['draft'];
@@ -67,6 +69,16 @@
 		$team = pg_execute($conn, 'draft_team', array($logged_in))
 			or die("Failed to execute draft team query".pg_last_error());
 		$draft_team = pg_fetch_array($team, NULL, PGSQL_ASSOC);
+		
+		// Check to see if that was our last round
+		if ($_SESSION['draft'] > 4){
+			$update2 = pg_prepare($conn, 'update2', "UPDATE master.user_info SET state=2 WHERE league=$1;")
+				or die("Failed to create state update query");
+			$update2 = pg_execute($conn, 'update2', array($logged_in))
+				or die("Failed to execute state update query");
+			$_SESSION['state'] = 2;
+			header('location:index.php');
+		}
 	}
 	
 	include_once('_SNIPPETS/head.php');
