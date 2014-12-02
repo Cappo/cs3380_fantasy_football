@@ -85,9 +85,9 @@ echo'
 			}
 echo'		</select>
 			<select class="form-control" name="player2">';
-			$players = pg_execute($conn, 'trade_players', array($logged_in,intval($_POST['team_id']))) or die("Failed to execute draft team query".pg_last_error());
+			$players = pg_execute($conn, 'trade_players', array($logged_in,intval($_POST['team2']))) or die("Failed to execute draft team query".pg_last_error());
 			while($player = pg_fetch_array($players, NULL, PGSQL_ASSOC)){
-			echo'<option value="'.$player['id'].'">'.$player['lname'].', '.$player['team2'].'</option>';
+			echo'<option value="'.$player['id'].'">'.$player['lname'].', '.$player['fname'].'</option>';
 			}
 echo'		</select>
 			<input class="btn btn-warning" name="submit_players" type="submit" value="Trade">
