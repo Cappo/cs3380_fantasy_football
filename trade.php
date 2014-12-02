@@ -32,8 +32,6 @@
 echo'<div class="jumbotron"><h1>Trade<br><small>Pick teams below</small></h1>';
 if ($team_error) echo '<p class="alert alert-danger">You cannot trade to the same team!</p>';
 echo'<form class="form" method="POST" action="trade.php">
-		<input type="hidden" name="team_id1" value="'.$_POST['team1'].'">
-		<input type="hidden" name="team_id2" value="'.$_POST['team2'].'">
 		<div class="form-group">
 			<select class="form-control" name="team1">';
 			//select all teams, display
@@ -62,6 +60,8 @@ if ($trade_success) echo '<p class="alert alert-success">Trade successful!</p>';
 if (isset($_POST['submit_teams']) && !$team_error){
 echo'
 		<form class="form" method="POST" action="trade.php">
+		<input type="hidden" name="team_id1" value="'.$_POST['team1'].'">
+		<input type="hidden" name="team_id2" value="'.$_POST['team2'].'">
 		<div class="form-group">
 			<select class="form-control" name="player1">';
 			$players = pg_prepare($conn, 'trade_players', "SELECT id,lname,fname FROM seasondb.season INNER JOIN (select player_id FROM master.draft WHERE league=$1 AND team_id=$2) AS Draft ON seasondb.season.id=Draft.player_id;") or die("Failed to create draft team query".pg_last_error());
