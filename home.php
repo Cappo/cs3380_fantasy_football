@@ -24,6 +24,9 @@
 				case 2:
 					echo '<p>Week '.$_SESSION['week'].'!</p><br><a href="#" clas="btn btn-default">Next week</a>';
 					break;
+				case 3:
+					echo '<p>Season over!</p>';
+					break;
 			}
 		?>
 	</div>
