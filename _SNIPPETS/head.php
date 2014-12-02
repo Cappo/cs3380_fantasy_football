@@ -110,6 +110,9 @@
 			<ul class="nav navbar-nav">
 				<li><a href="home.php">League</a></li>
 				<li><a href="players.php">Players</a></li>
+<?php if ($_SESSION['state'] == 2) { ?>
+				<li><a href="trade.php">Trade</a></li>
+<?php } ?>
 			</ul>
         </div>
 	</div>
