@@ -19,9 +19,9 @@
 	} else if (isset($_POST['submit_players'])){
 		// Trade the players (swap team_id in master.draft table)
 		$update1 = pg_prepare($conn, 'update1', "UPDATE master.draft SET team_id=$1 WHERE team_id=$2 AND player_id=$3;") or die("Failed to create draft team query".pg_last_error());
-		$update1 = pg_execute($conn, 'update1', array($_POST['team_id2'],$_POST['team_id1'],$_POST['player2'])) or die("Failed to execute draft team query".pg_last_error());
+		$update1 = pg_execute($conn, 'update1', array($_POST['team_id2'],$_POST['team_id1'],$_POST['player1'])) or die("Failed to execute draft team query".pg_last_error());
 		$update2 = pg_prepare($conn, 'update2', "UPDATE master.draft SET team_id=$1 WHERE team_id=$2 AND player_id=$3;") or die("Failed to create draft team query".pg_last_error());
-		$update2 = pg_execute($conn, 'update2', array($_POST['team_id1'],$_POST['team_id2'],$_POST['player1'])) or die("Failed to execute draft team query".pg_last_error());
+		$update2 = pg_execute($conn, 'update2', array($_POST['team_id1'],$_POST['team_id2'],$_POST['player2'])) or die("Failed to execute draft team query".pg_last_error());
 		$trade_success = true;
 	}
 	
